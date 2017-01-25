@@ -1,0 +1,42 @@
+<%= form_for @search, url: '/search' do |f| %>
+
+  <%= f.label :disease_name %>
+  <%= f.text_field :disease_name %><br>
+
+  <%= f.label :max_age %>
+  <%= f.text_field :max_age %><br>
+
+  <%= f.label :min_age %>
+  <%= f.text_field :min_age %><br>
+
+  <%= f.label :lat %>
+  <%= f.text_field :lat %><br>
+
+  <%= f.label :lon %>
+  <%= f.text_field :lon %><br>
+
+  <%= f.label :distance %>
+  <%= f.text_field :distance %><br>
+
+  <%= f.submit :search %>
+
+<% end %>
+
+
+<script>
+  jQuery(function() {
+   return $('#search_disease_name').autocomplete({
+    //  source: <%= @diseases %>
+    source: function(request, response) {
+      $.ajax({
+        type: "GET",
+        url: "/search/diseases",
+        dataType: "json",
+        success: function (data) {
+          response(data)
+        }
+      })
+    }
+   });
+  });
+</script>
