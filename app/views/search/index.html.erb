@@ -1,13 +1,17 @@
-<%= form_for @search, url: '/search' do |f| %>
+<div style="display: block; margin: auto; width: 400px;">
+  <%= form_for @search, url: '/search', remote: true  do |f| %>
 
-  <%= f.label :disease_name %>
-  <%= f.text_field :disease_name %><br>
+    <%= f.label :disease_name %>
+    <%= f.text_field :disease_name %><br>
 
-  <%= f.submit :search %>
+    <%= f.submit :search %>
 
-<% end %>
+  <% end %>
 
 
+  <div id="results-container">
+  </div>
+</div>
 <script>
   $('#search_disease_name').autocomplete({
     source: function(request, response) {
@@ -23,4 +27,16 @@
       });
     }
   });
+  $(document).ajaxSuccess(function(event, request, settings) {
+    if(settings.url == '/search') {
+      $('#results').remove()
+      $('#results-container').append(request.responseText)
+      $('.contact_email_list, .sites_more_results_button').on('click', function(){
+        $('.contact_email_list').toggleClass('hidden-overflow');
+      });
+      $('.disease_list, .diseases_more_results_button').on('click', function(){
+        $('.disease_list').toggleClass('hidden-overflow');
+      });
+    }
+  })
 </script>

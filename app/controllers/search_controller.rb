@@ -25,38 +25,12 @@ class SearchController < ApplicationController
       trial["diseases"].select! {|disease| !disease["display_name"].nil? && !disease["display_name"].empty?}
       trial["sites"].select! {|site| !site["contact_email"].nil? && !site["contact_email"].empty?}
     end
-
-    byebug
-    # <%= form_for @search, url: '/search' do |f| %>
-    #
-    #
-    #   <%= f.label :lat %>
-    #   <%= f.text_field :lat %><br>
-    #
-    #   <%= f.label :lon %>
-    #   <%= f.text_field :lon %><br>
-    #
-    #   <%= f.label :distance %>
-    #   <%= f.text_field :distance %><br>
-    #
-    #   <%= f.submit :search %>
-    #
-    # <% end %>
-#     Name
-# diseases.display_name
-# Eligibility
-# eligibility.structured.gender
-# eligibility.structured.max_age_in_years
-# eligibility.structured.min_age_in_years
-# Trial Status
-# current_trial_status
-# Location
-# sites.org_coordinates_lat
-# sites.org_coordinates_lon
-# Sites.org_coordinates_dist (100mi)
-
-    byebug
-    redirect_to :back
+    # result['trials'].first['principal_investigator']
+    # render json: result
+    @diseases = Disease.all.pluck(:name)
+    @search = Search.new
+    @result = result
+    render partial: 'search_results', locals: {result: @result}
   end
 
   def diseases

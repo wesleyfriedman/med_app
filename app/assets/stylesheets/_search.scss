@@ -51,3 +51,15 @@
     }
   }
 }
+
+.contact_email_list:hover, .disease_list:hover {
+  background-color: #ADD8E6;
+}
+.contact_email_list:hover, .disease_list:hover, .sites_more_results_button:hover, .diseases_more_results_button:hover {
+  cursor: pointer;
+}
+
+.hidden-overflow {
+  height: 50px;
+  overflow: hidden;
+}

@@ -1,0 +1,44 @@
+<div id="results" style="width: 400px;text-align: left">
+  <ol>
+    <% @result['trials'].each do |result| %>
+      <li>
+
+        <p>
+          Principal Investigator: <%= result['principal_investigator'] %>
+        </p>
+
+        <p>
+          Lead Organization: <%= result['lead_org'] %>
+        </p>
+
+        <p>
+          Disease Name:
+          <ol class="disease_list hidden-overflow">
+            <% result['diseases'].uniq.each do |disease| %>
+            <li>
+              <%= disease['display_name'] %>
+            </li>
+            <% end %>
+          </ol>
+          <div class="diseases_more_results_button">
+            <%= "Click for more results" if result['diseases'].uniq.length > 2 %>
+          </div>
+        </p>
+
+        <p>
+          Contact Email:
+          <ol class="contact_email_list hidden-overflow">
+            <% result['sites'].uniq.each do |site| %>
+            <li class="contact_email">
+              <%= site['contact_email'] %>
+            </li>
+            <% end %>
+          </ol>
+          <div class="sites_more_results_button">
+            <%= "Click for more results" if result['sites'].uniq.length > 2 %>
+          </div>
+        </p>
+      </li>
+    <% end %>
+  </ol>
+</div>

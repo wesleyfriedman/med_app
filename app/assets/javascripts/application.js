@@ -15,3 +15,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$('.contact_email_list').on('click', function(){
+  $('.contact_email_list').css('height', 'auto');
+});
